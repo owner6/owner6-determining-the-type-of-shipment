@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визначення типу відправлення</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Введіть розміри та вагу відправлення:</h2>
+
+    <label for="weight">Вага (кг):</label>
+    <input type="number" id="weight" step="any" required><br>
+
+    <label for="length">Довжина (см):</label>
+    <input type="number" id="length" required><br>
+
+    <label for="width">Ширина (см):</label>
+    <input type="number" id="width" required><br>
+
+    <label for="height">Висота (см):</label>
+    <input type="number" id="height" required><br>
+
+    <button onclick="checkPackageType()">Визначити тип відправлення</button>
+
+    <div id="result"></div>
+
+    <script>
+        function checkPackageType() {
+            var weight = parseFloat(document.getElementById("weight").value);
+            var length = parseFloat(document.getElementById("length").value);
+            var width = parseFloat(document.getElementById("width").value);
+            var height = parseFloat(document.getElementById("height").value);
+
+            var sumOfDimensions = length + width + height;
+
+            if (weight < 30) {
+                if (sumOfDimensions > 250 && sumOfDimensions <= 350 && length <= 200) {
+                    displayResult("Великогабаритне відправлення");
+                } else {
+                    displayResult("Непідходящі розміри для великогабаритного відправлення");
+                }
+            } else if (weight >= 30 && weight <= 600) {
+                if (length <= 120 && width <= 120 && height <= 180) {
+                    displayResult("Великовагове відправлення на палеті");
+                } else {
+                    displayResult("Непідходящі розміри для великовагового відправлення на палеті");
+                }
+            } else {
+                displayResult("Непідходяща вага для обробки");
+            }
+        }
+
+        function displayResult(message) {
+            document.getElementById("result").innerHTML = message;
+        }
+    </script>
+</body>
+</html>
