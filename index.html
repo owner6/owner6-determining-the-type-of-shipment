@@ -73,23 +73,30 @@
             var length = parseFloat(document.getElementById("length").value);
             var width = parseFloat(document.getElementById("width").value);
             var height = parseFloat(document.getElementById("height").value);
-
             var sumOfDimensions = length + width + height;
 
-            if (weight < 30) {
-                if (sumOfDimensions > 250 && sumOfDimensions <= 350 && length <= 200) {
-                    displayResult("Великогабаритне відправлення");
+            if (sumOfDimensions > 350) {
+                if (weight <= 600) {
+                    displayResult("Великогабаритне відправлення на палеті");
                 } else {
-                    displayResult("Звичайне відправлення");
-                }
-            } else if (weight >= 30 && weight <= 600) {
-                if (length <= 120 && width <= 120 && height <= 180) {
-                    displayResult("Великовагове відправлення на палеті");
-                } else {
-                    displayResult("Непідходящі розміри для великовагового відправлення на палеті");
+                    displayResult("Непідходяща вага для обробки");
                 }
             } else {
-                displayResult("Непідходяща вага для обробки");
+                if (weight < 30) {
+                    if (sumOfDimensions > 250 && sumOfDimensions <= 350 && length <= 200) {
+                        displayResult("Великогабаритне відправлення");
+                    } else {
+                        displayResult("Звичайне відправлення");
+                    }
+                } else if (weight >= 30 && weight <= 600) {
+                    if (length <= 120 && width <= 120 && height <= 180) {
+                        displayResult("Великовагове відправлення на палеті");
+                    } else {
+                        displayResult("Непідходящі розміри для великовагового відправлення на палеті");
+                    }
+                } else {
+                    displayResult("Непідходяща вага для обробки");
+                }
             }
         }
 
